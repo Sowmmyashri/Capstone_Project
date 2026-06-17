@@ -1,0 +1,8 @@
+/* Transfer Component Styles */
+/* Most styles are handled by global css (.card, .btn, .form-group) */
+
+.input-wrapper {
+  position: relative;
+}
+
+/* Add any specific overrides here if needed */

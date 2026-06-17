@@ -1,0 +1,91 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header mb-4 flex justify-between items-center">
+      <div>
+        <h2>Transaction History</h2>
+        <p>View your recent financial activity.</p>
+      </div>
+      <a routerLink="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+
+    <!-- Filters Section -->
+    <div class="filters-section">
+      <div class="filter-row">
+        <div class="filter-group">
+          <label for="searchInput">Search</label>
+          <input 
+            type="text" 
+            id="searchInput"
+            [(ngModel)]="searchText"
+            (ngModelChange)="onFilterChange()"
+            placeholder="Search by account name..."
+            class="form-control"
+          />
+        </div>
+
+        <div class="filter-group">
+          <label for="statusFilter">Status</label>
+          <select 
+            id="statusFilter"
+            [(ngModel)]="statusFilter"
+            (ngModelChange)="onFilterChange()"
+            class="form-control"
+          >
+            <option value="all">All Status</option>
+            <option value="SUCCESS">Success</option>
+            <option value="FAILED">Failed</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="directionFilter">Direction</label>
+          <select 
+            id="directionFilter"
+            [(ngModel)]="directionFilter"
+            (ngModelChange)="onFilterChange()"
+            class="form-control"
+          >
+            <option value="all">All Transactions</option>
+            <option value="sent">Sent</option>
+            <option value="received">Received</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transactions Table -->
+    <div class="table-responsive">
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Transaction</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date & Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tx of filteredTransactions">
+            <td>
+              <span *ngIf="tx.direction === 'sent'" class="badge badge-sent">Sent to</span>
+              <span *ngIf="tx.direction === 'received'" class="badge badge-received">Received from</span>
+              {{ tx.otherPartyName }}
+            </td>
+            <td class="font-bold">{{ tx.amount | currency:'USD' }}</td>
+            <td>
+              <span class="status-badge" [class]="tx.status.toLowerCase()">
+                {{ tx.status }}
+              </span>
+            </td>
+            <td>
+              {{ tx.createdOn | date:'dd MMM yyyy, hh:mm a' }}
+            </td>
+          </tr>
+          <tr *ngIf="filteredTransactions.length === 0">
+            <td colspan="4" class="text-center py-4">No transactions found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

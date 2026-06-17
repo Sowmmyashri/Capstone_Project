@@ -1,0 +1,7 @@
+/* Basic styles for rewards */
+.rewards-header h2 {
+  color: var(--text-color);
+}
+.reward-points {
+  margin: 1rem 0;
+}

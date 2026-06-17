@@ -1,0 +1,133 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header mb-4 flex justify-between items-center">
+      <div>
+        <h2>Transaction Analytics</h2>
+        <p>View your transaction metrics and insights.</p>
+      </div>
+      <a routerLink="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+
+    <!-- KPI Metrics Grid -->
+    <div class="kpi-grid">
+      <!-- Total Transactions KPI -->
+      <div class="kpi-card">
+        <div class="kpi-icon transaction-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"></polyline>
+            <line x1="12" y1="12" x2="20" y2="7.5"></line>
+            <line x1="12" y1="12" x2="12" y2="21"></line>
+            <line x1="12" y1="12" x2="4" y2="7.5"></line>
+          </svg>
+        </div>
+        <div class="kpi-content">
+          <p class="kpi-label">Total Transactions</p>
+          <h3 class="kpi-value">{{ totalTransacions }}</h3>
+        </div>
+      </div>
+
+      <!-- Successful Transactions KPI -->
+      <div class="kpi-card">
+        <div class="kpi-icon success-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <div class="kpi-content">
+          <p class="kpi-label">Successful</p>
+          <h3 class="kpi-value success">{{ successfulTransactions }}</h3>
+        </div>
+      </div>
+
+      <!-- Failed Transactions KPI -->
+      <div class="kpi-card">
+        <div class="kpi-icon failed-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+          </svg>
+        </div>
+        <div class="kpi-content">
+          <p class="kpi-label">Failed</p>
+          <h3 class="kpi-value failed">{{ failedTransactions }}</h3>
+        </div>
+      </div>
+
+      <!-- Total Amount Transferred KPI -->
+      <div class="kpi-card">
+        <div class="kpi-icon sent-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </div>
+        <div class="kpi-content">
+          <p class="kpi-label">Amount Sent</p>
+          <h3 class="kpi-value">{{ totalAmountTransferred | currency:'USD' }}</h3>
+        </div>
+      </div>
+
+      <!-- Total Amount Received KPI -->
+      <div class="kpi-card">
+        <div class="kpi-icon received-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="2 22 16 8 2 8"></polyline>
+            <polyline points="22 2 22 8 16 8"></polyline>
+          </svg>
+        </div>
+        <div class="kpi-content">
+          <p class="kpi-label">Amount Received</p>
+          <h3 class="kpi-value">{{ totalAmountReceived | currency:'USD' }}</h3>
+        </div>
+      </div>
+
+      <!-- Most Transacted Person KPI -->
+      <div class="kpi-card">
+        <div class="kpi-icon partner-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <div class="kpi-content">
+          <p class="kpi-label">Most Contacted</p>
+          <h3 class="kpi-value">{{ mostTransactedPerson.name || 'N/A' }}</h3>
+          <p class="kpi-subtitle">{{ mostTransactedPerson.count }} transactions</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Recipients/Senders -->
+    <div class="section mt-4">
+      <h3>Top Contacts</h3>
+      <div class="table-responsive">
+        <table class="analytics-table">
+          <thead>
+            <tr>
+              <th>Contact Name</th>
+              <th>Transaction Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let contact of topRecipients">
+              <td>{{ contact.name }}</td>
+              <td class="text-center">{{ contact.count }}</td>
+            </tr>
+            <tr *ngIf="topRecipients.length === 0">
+              <td colspan="2" class="text-center py-4">No transactions yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

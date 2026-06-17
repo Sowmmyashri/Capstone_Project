@@ -1,0 +1,35 @@
+<div class="app-layout">
+    <nav class="navbar">
+        <div class="container nav-content" style="display: flex; justify-content: space-between; align-items: center;">
+            <a routerLink="/" class="nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-send">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+                <span>MoneyTransfer</span>
+            </a>
+            
+            <div class="nav-links" *ngIf="authService.isLoggedIn()" style="display: flex; gap: 1rem; align-items: center;">
+                <a routerLink="/dashboard" class="nav-link" routerLinkActive="active" style="text-decoration: none; color: var(--text-color);">Dashboard</a>
+                <a routerLink="/transfer" class="nav-link" routerLinkActive="active" style="text-decoration: none; color: var(--text-color);">Transfer</a>
+                <a routerLink="/history" class="nav-link" routerLinkActive="active" style="text-decoration: none; color: var(--text-color);">History</a>
+                <a routerLink="/rewards" class="nav-link" routerLinkActive="active" style="text-decoration: none; color: var(--text-color);">Rewards</a>
+                <button (click)="logout()" class="btn btn-secondary btn-sm" style="padding: 0.25rem 0.75rem;">Logout</button>
+            </div>
+            <div class="nav-links" *ngIf="!authService.isLoggedIn()" style="display: flex; gap: 1rem;">
+                <a routerLink="/login" class="btn btn-secondary btn-sm" style="padding: 0.25rem 0.75rem;">Login</a>
+                <a routerLink="/register" class="btn btn-primary btn-sm" style="padding: 0.25rem 0.75rem;">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <router-outlet></router-outlet>
+    </main>
+
+    <footer class="text-center" style="padding: 2rem; color: var(--text-muted); font-size: 0.875rem;">
+        &copy; 2024 Money Transfer System. All rights reserved.
+    </footer>
+</div>
