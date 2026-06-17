@@ -33,7 +33,7 @@ public class AccountService {
                 .orElseThrow(() -> new AccountNotFoundException(id));
         
         if (!account.getUser().getUsername().equals(username)) {
-            throw new com.example.moneytransfer.exception.DomainException("Unauthorized access to account", "ACC-403");
+            throw new com.example.moneytransfer.exception.DomainException("ACC-403", "Unauthorized access to account");
         }
         
         return toResponse(account);
@@ -52,7 +52,7 @@ public class AccountService {
                 .orElseThrow(() -> new AccountNotFoundException(id));
 
         if (!account.getUser().getUsername().equals(username)) {
-            throw new com.example.moneytransfer.exception.DomainException("Unauthorized access to account", "ACC-403");
+            throw new com.example.moneytransfer.exception.DomainException("ACC-403", "Unauthorized access to account");
         }
         return account.getBalance();
     }
@@ -64,7 +64,7 @@ public class AccountService {
                 .orElseThrow(() -> new AccountNotFoundException(id));
 
         if (!account.getUser().getUsername().equals(username)) {
-            throw new com.example.moneytransfer.exception.DomainException("Unauthorized access to account", "ACC-403");
+            throw new com.example.moneytransfer.exception.DomainException("ACC-403", "Unauthorized access to account");
         }
         
         List<TransactionLog> logs = transactionLogRepository.findByFromAccountIdOrToAccountId(id, id);

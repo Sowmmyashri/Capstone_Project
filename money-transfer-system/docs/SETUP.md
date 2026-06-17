@@ -10,7 +10,8 @@
 
 ## Backend Setup (Spring Boot)
 
-1. **Create the database and user in MySQL:**
+1. **Create the database and user in MySQL Workbench:**
+Open MySQL Workbench, create a new SQL tab, and execute the following:
 
 ```sql
 CREATE DATABASE money_transfer;
@@ -19,13 +20,11 @@ GRANT ALL PRIVILEGES ON money_transfer.* TO 'money_user'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-2. **Apply schema and seed data:**
-From the project root directory, run:
-
-```bash
-mysql -u money_user -p money_transfer < database/schema.sql
-mysql -u money_user -p money_transfer < database/seed-data.sql
-```
+2. **Apply schema and seed data via MySQL Workbench:**
+   - In MySQL Workbench, connect as the `root` user or the newly created `money_user`.
+   - Set `money_transfer` as your default schema by double-clicking it in the left sidebar (or run `USE money_transfer;`).
+   - Open the `database/schema.sql` file in a new SQL tab (File -> Open SQL Script...) and click the "Execute" (lightning bolt) button to create the tables.
+   - Open the `database/seed-data.sql` file in another SQL tab and click "Execute" to insert the initial data.
 
 3. **Start the backend server:**
 
@@ -44,8 +43,6 @@ The backend will run on `http://localhost:8080`.
 - `GET /api/v1/accounts/{id}/transactions` - Get transaction history.
 - `GET /api/rewards` - Get rewards earned by the user.
 - `GET /api/rewards/summary` - Get total reward points.
-
-*(Note: The previous documentation stated APIs were secured with Basic Auth, but they are actually secured with JWT.)*
 
 ## Frontend Setup (Angular)
 

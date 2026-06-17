@@ -67,7 +67,7 @@ public class TransferService {
 
             // Verify ownership
             if (!source.getUser().getUsername().equals(username)) {
-                throw new com.example.moneytransfer.exception.DomainException("Unauthorized: Source account does not belong to user", "ACC-403");
+                throw new com.example.moneytransfer.exception.DomainException("ACC-403", "Unauthorized: Source account does not belong to user");
             }
 
             Account destination = accountRepository.findById(request.getToAccountId())
