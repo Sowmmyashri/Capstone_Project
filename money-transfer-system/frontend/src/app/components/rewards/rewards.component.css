@@ -1,7 +1,95 @@
-/* Basic styles for rewards */
-.rewards-header h2 {
-  color: var(--text-color);
+/* Rewards Component Styles */
+
+.rewards-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
 }
+
+.rewards-header h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.points-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  color: white;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 15px 30px -5px rgba(245, 158, 11, 0.3);
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.points-display::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+  animation: rotate 20s linear infinite;
+  pointer-events: none;
+}
+
+.points-display h3 {
+  color: rgba(255,255,255,0.9);
+  font-size: 1.25rem;
+  z-index: 1;
+}
+
 .reward-points {
-  margin: 1rem 0;
+  font-size: 5rem;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+
+/* Reusing history table styles via global context or duplicating minimally */
+.table-responsive {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  background: white;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background: #f8fafc;
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 1.25rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+}
+
+.table td {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.table tr:hover td {
+  background-color: #f8fafc;
 }
